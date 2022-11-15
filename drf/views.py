@@ -76,4 +76,10 @@ class PaymentMethodCount(APIView):
         counter = {f"{method}":payment_method.count(), "Out of":total_payments.count()}
         return Response(counter)
 
-
+class DateFilter(APIView):
+    def get(self, request, From, To, format=None):
+        queryset = Revenue.objects.filter(date__range = [From, To])
+        serializer = RevenueSerializer(queryset, many=True)
+        return Response(serializer.data)
+   
+       
