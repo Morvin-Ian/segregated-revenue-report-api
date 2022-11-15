@@ -11,8 +11,8 @@ from rest_framework import status
    
 class RevenueList(APIView):
     def get(self, request, format=None):
-        revenues = Revenue.objects.all()
-        serializer = RevenueSerializer(revenues, many=True)
+        queryset = Revenue.objects.all()
+        serializer = RevenueSerializer(queryset, many=True)
         return Response(serializer.data)
 
 
@@ -31,42 +31,41 @@ class RevenueDetail(APIView):
             raise Http404
 
     def get(self, request, pk, format=None):
-        revenue = self.get_object(pk)
-        serializer = RevenueSerializer(revenue)
+        queryset = self.get_object(pk)
+        serializer = RevenueSerializer(queryset)
         return Response(serializer.data)
 
 class RegistrationTotal(APIView):
     def get(self, request, format=None):
-        revenues = Revenue.objects.exclude(registration=0.00)
-        serializer = RevenueSerializer(revenues, many=True)
+        queryset = Revenue.objects.exclude(registration=0.00)
+        serializer = RevenueSerializer(queryset, many=True)
         return Response(serializer.data)
 
 class PharmacyTotal(APIView):
     def get(self, request, format=None):
-        revenues = Revenue.objects.exclude(pharmacy=0.00)
-        serializer = RevenueSerializer(revenues, many=True)
+        queryset = Revenue.objects.exclude(pharmacy=0.00)
+        serializer = RevenueSerializer(queryset, many=True)
         return Response(serializer.data)
 
 
 class LaboratoryTotal(APIView):
     def get(self, request, format=None):
-        revenues = Revenue.objects.exclude(laboratory=0.00)
-        rev_lab = revenues[0]
-        serializer = RevenueSerializer(revenues, many=True)
+        queryset = Revenue.objects.exclude(laboratory=0.00)
+        serializer = RevenueSerializer(queryset, many=True)
         return Response(serializer.data)
 
 
 class RadiologyTotal(APIView):
     def get(self, request, format=None):
-        revenues = Revenue.objects.exclude(radiology=0.00)
-        serializer = RevenueSerializer(revenues, many=True)
+        queryset = Revenue.objects.exclude(radiology=0.00)
+        serializer = RevenueSerializer(queryset, many=True)
         return Response(serializer.data)
 
 
 class ProceduresTotal(APIView):
     def get(self, request, format=None):
-        revenues = Revenue.objects.exclude(procedure=0.00)
-        serializer = RevenueSerializer(revenues, many=True)
+        queryset = Revenue.objects.exclude(procedure=0.00)
+        serializer = RevenueSerializer(queryset, many=True)
         return Response(serializer.data)
 
 
